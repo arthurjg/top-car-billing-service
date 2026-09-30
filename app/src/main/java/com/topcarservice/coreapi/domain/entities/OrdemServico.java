@@ -12,6 +12,8 @@ public class OrdemServico {
 	
 	private Veiculo veiculo;
 	
+	private Cliente cliente;
+	
 	private List<ServicoSolicitado> servicos;	
 	
 	private List<PecaInsumoSolicitado> pecasInsumos;
@@ -51,7 +53,15 @@ public class OrdemServico {
 
 	public void setStatus(StatusOrdemServico status) {
 		this.status = status;
-	}	
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public List<ServicoSolicitado> getServicos() {
 		return servicos;
