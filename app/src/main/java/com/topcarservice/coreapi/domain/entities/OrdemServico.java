@@ -1,0 +1,84 @@
+package com.topcarservice.coreapi.domain.entities;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class OrdemServico {
+	
+	private Long codigo;	
+	
+	private StatusOrdemServico status;		
+	
+	private Veiculo veiculo;
+	
+	private List<ServicoSolicitado> servicos;	
+	
+	private List<PecaInsumoSolicitado> pecasInsumos;
+	
+	private LocalDateTime dataAbertura;
+
+	public OrdemServico() {
+		super();
+		dataAbertura = LocalDateTime.now();
+		status = StatusOrdemServico.RECEBIDA;		
+		servicos = new ArrayList<>();		
+		pecasInsumos = new ArrayList<>();
+	}		
+
+	@Deprecated
+	public OrdemServico(Long codigo, StatusOrdemServico status, 
+			List<ServicoSolicitado> servicos, List<PecaInsumoSolicitado> pecasInsumos, LocalDateTime dataAbertura) {
+		super();
+		this.codigo = codigo;
+		this.status = status;		
+		this.servicos = servicos;
+		this.pecasInsumos = pecasInsumos;
+		this.dataAbertura = dataAbertura;
+	}	
+
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
+	public StatusOrdemServico getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusOrdemServico status) {
+		this.status = status;
+	}	
+
+	public List<ServicoSolicitado> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<ServicoSolicitado> servicos) {
+		this.servicos = servicos;
+	}
+
+	public List<PecaInsumoSolicitado> getPecasInsumos() {
+		return pecasInsumos;
+	}
+
+	public void setPecasInsumos(List<PecaInsumoSolicitado> pecasInsumos) {
+		this.pecasInsumos = pecasInsumos;
+	}
+
+	public LocalDateTime getDataAbertura() {
+		return dataAbertura;
+	}
+
+	public void setDataAbertura(LocalDateTime dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}	
+
+}
