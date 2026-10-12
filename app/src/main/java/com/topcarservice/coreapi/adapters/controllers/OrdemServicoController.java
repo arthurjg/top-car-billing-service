@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.topcarservice.coreapi.adapters.controllers.dto.OrdemServicoRetornoDTO;
 import com.topcarservice.coreapi.adapters.controllers.mappers.OrdemServicoMapper;
 import com.topcarservice.coreapi.domain.entities.OrdemServico;
+import com.topcarservice.coreapi.domain.entities.OrdemServicoOrcamento;
+import com.topcarservice.coreapi.domain.usecases.AprovacaoOSUseCase;
+import com.topcarservice.coreapi.domain.usecases.OrcamentoOSUseCase;
 import com.topcarservice.coreapi.domain.usecases.OrdemServicoUseCase;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +23,11 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/admin/ordem-servicos")
 public class OrdemServicoController {
 	
-	OrdemServicoUseCase ordemServicoUseCase;		
+	OrdemServicoUseCase ordemServicoUseCase;	
+	
+	OrcamentoOSUseCase orcamentoOSUseCase;
+	
+	AprovacaoOSUseCase aprovacaoOSUseCase;
 	
 	OrdemServicoMapper ordemServicoMapper;		
 	
@@ -30,7 +37,9 @@ public class OrdemServicoController {
 		try {
 			OrdemServico ordemServico = ordemServicoUseCase.carregar(codigo);	
 			
-			//ordemServicoUseCase.enviarAprovacao(ordemServico); TODO TEST ALTERAR
+			OrdemServicoOrcamento ordemServicoOrcamento = orcamentoOSUseCase.gerarOrcamento(ordemServico);
+		
+			aprovacaoOSUseCase.enviarAprovacaoOrdemServico(ordemServico, ordemServicoOrcamento);
 			
 			OrdemServicoRetornoDTO ordemservicoResponse = ordemServicoMapper.map(ordemServico);
 			
