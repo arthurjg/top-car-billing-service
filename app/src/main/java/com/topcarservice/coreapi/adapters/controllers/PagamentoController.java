@@ -13,7 +13,7 @@ import com.topcarservice.coreapi.domain.entities.OrdemServico;
 import com.topcarservice.coreapi.domain.entities.OrdemServicoOrcamento;
 import com.topcarservice.coreapi.domain.usecases.AprovacaoOSUseCase;
 import com.topcarservice.coreapi.domain.usecases.OrcamentoOSUseCase;
-import com.topcarservice.coreapi.domain.usecases.OrdemServicoUseCase;
+//import com.topcarservice.coreapi.domain.usecases.OrdemServicoUseCase;
 import com.topcarservice.coreapi.domain.usecases.PagamentoUseCase;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,7 +25,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/admin/ordem-servicos")
 public class PagamentoController {
 	
-	PagamentoUseCase pagamentoUseCase;	
+	/*PagamentoUseCase pagamentoUseCase;	
 	
 	OrdemServicoUseCase ordemServicoUseCase;		
 	
@@ -71,6 +71,6 @@ public class PagamentoController {
 		} catch (IllegalStateException e) {			
 			return ResponseEntity.badRequest().build();
 		}	
-	}	
+	}	*/
 
 }
