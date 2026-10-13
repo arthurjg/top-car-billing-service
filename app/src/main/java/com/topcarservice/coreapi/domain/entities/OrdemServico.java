@@ -10,9 +10,9 @@ public class OrdemServico {
 	
 	private StatusOrdemServico status;		
 	
-	private Veiculo veiculo;
+	private String veiculo;
 	
-	private Cliente cliente;
+	private String cliente;
 	
 	private List<ServicoSolicitado> servicos;	
 	
@@ -53,15 +53,7 @@ public class OrdemServico {
 
 	public void setStatus(StatusOrdemServico status) {
 		this.status = status;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+	}	
 
 	public List<ServicoSolicitado> getServicos() {
 		return servicos;
@@ -87,8 +79,20 @@ public class OrdemServico {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public Veiculo getVeiculo() {
+	public String getVeiculo() {
 		return veiculo;
+	}
+
+	public void setVeiculo(String veiculo) {
+		this.veiculo = veiculo;
+	}
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}	
 
 }

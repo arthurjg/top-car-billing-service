@@ -23,8 +23,7 @@ public class Pagamento {
 	public Pagamento(OrdemServico ordemServico) {
 		this();
 		
-		identificadorPagador = ordemServico.getCliente().getCpf() != null 
-				? ordemServico.getCliente().getCpf().toString() : ordemServico.getCliente().getCnpj();
+		identificadorPagador = ordemServico.getCliente();
 		
 		identificadorRecebedor = "TOPCARSERVICE LTDA";
 		

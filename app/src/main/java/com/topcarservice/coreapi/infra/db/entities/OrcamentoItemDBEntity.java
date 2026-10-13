@@ -1,13 +1,12 @@
 package com.topcarservice.coreapi.infra.db.entities;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,18 +20,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "servico")
-public class ServicoDBEntity {
+@Table(name = "orcamento_item")
+public class OrcamentoItemDBEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Long codigo;	
+	private Long codigo;
 	
-	private String nome;
+	private String descricao;
+	private Integer quantidade;
+	private BigDecimal valorUnitario;
+	private BigDecimal valorTotal;
 	
-	private BigDecimal valorMaoDeObra;
-	
-	@OneToMany(mappedBy = "servico")
-	private List<PecaInsumoDBEntity> pecasInsumos;
+	@ManyToOne
+	private OrcamentoDBEntity orcamento;
 
 }

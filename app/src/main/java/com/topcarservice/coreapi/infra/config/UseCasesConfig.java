@@ -3,22 +3,21 @@ package com.topcarservice.coreapi.infra.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.topcarservice.coreapi.domain.usecases.AprovacaoOSUseCase;
 import com.topcarservice.coreapi.domain.usecases.OrcamentoOSUseCase;
-import com.topcarservice.coreapi.domain.usecases.OrdemServicoUseCase;
-import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoInputPort;
-import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputPort;
+import com.topcarservice.coreapi.domain.usecases.ports.OrcamentoInputPort;
 
 @Configuration
 public class UseCasesConfig {	
 	
 	@Bean
-	OrdemServicoUseCase ordemServicoUseCase(OrdemServicoInputPort inputPort, OrdemServicoOutputPort outputPort) {
-		return new OrdemServicoUseCase(inputPort, outputPort);
+	OrcamentoOSUseCase orcamentoOSUseCase(OrcamentoInputPort inputPort) {
+		return new OrcamentoOSUseCase(inputPort);
 	}
 	
 	@Bean
-	OrcamentoOSUseCase orcamentoOSUseCase() {
-		return new OrcamentoOSUseCase();
+	AprovacaoOSUseCase aprovacaoOSUseCase() {
+		return new AprovacaoOSUseCase();
 	}
 
 }
