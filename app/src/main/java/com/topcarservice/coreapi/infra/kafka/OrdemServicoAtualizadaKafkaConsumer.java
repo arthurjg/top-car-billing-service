@@ -9,6 +9,7 @@ import com.topcarservice.coreapi.adapters.controllers.mappers.OrcamentoMapper;
 import com.topcarservice.coreapi.adapters.controllers.mappers.OrdemServicoMapper;
 import com.topcarservice.coreapi.domain.entities.OrdemServico;
 import com.topcarservice.coreapi.domain.entities.OrdemServicoOrcamento;
+import com.topcarservice.coreapi.domain.entities.StatusOrdemServico;
 import com.topcarservice.coreapi.domain.usecases.AprovacaoOSUseCase;
 import com.topcarservice.coreapi.domain.usecases.OrcamentoOSUseCase;
 
@@ -35,6 +36,11 @@ public class OrdemServicoAtualizadaKafkaConsumer {
 		log.info("OS atualizada recebida no tópico: {}.", ordemServicoDTO.getCodigo());
 			
 		OrdemServico ordemServico = ordemServicoMapper.map(ordemServicoDTO);
+		
+		if(!ordemServico.getStatus().equals(StatusOrdemServico.EM_DIAGNOSTICO)) {
+			log.info("Ordem de serviço {} não está em diagnóstico. Nenhuma ação será tomada.", ordemServico.getCodigo());
+			return;
+		}
 			
 		OrdemServicoOrcamento orcamento = orcamentoOSUseCase.gerarOrcamento(ordemServico);	
 		
