@@ -20,17 +20,13 @@ public class Pagamento {
 		statusPagamento = "PENDENTE";
 	}
 	
-	public Pagamento(OrdemServico ordemServico) {
+	public Pagamento(OrdemServicoOrcamento orcamento, String formaPagamento) {
 		this();
-		
-		identificadorPagador = ordemServico.getCliente();
-		
-		identificadorRecebedor = "TOPCARSERVICE LTDA";
-		
-		//valorTotal = 
-		
-		
-		
+	
+		this.formaPagamento = formaPagamento;
+		identificadorPagador = orcamento.getCliente();		
+		identificadorRecebedor = "TOPCARSERVICE LTDA";		
+		valorTotal = orcamento.getValorTotal();		
 	}
 	
 	public Long getCodigo() {

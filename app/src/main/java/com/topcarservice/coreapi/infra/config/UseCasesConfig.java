@@ -5,14 +5,25 @@ import org.springframework.context.annotation.Configuration;
 
 import com.topcarservice.coreapi.domain.usecases.AprovacaoOSUseCase;
 import com.topcarservice.coreapi.domain.usecases.OrcamentoOSUseCase;
+import com.topcarservice.coreapi.domain.usecases.PagamentoUseCase;
 import com.topcarservice.coreapi.domain.usecases.ports.OrcamentoInputPort;
+import com.topcarservice.coreapi.domain.usecases.ports.OrcamentoOutputPort;
+import com.topcarservice.coreapi.domain.usecases.ports.PagamentoInputPort;
+import com.topcarservice.coreapi.domain.usecases.ports.PagamentoOutputPort;
+import com.topcarservice.coreapi.domain.usecases.ports.PagamentoProcessamentoInputPort;
 
 @Configuration
 public class UseCasesConfig {	
 	
 	@Bean
-	OrcamentoOSUseCase orcamentoOSUseCase(OrcamentoInputPort inputPort) {
-		return new OrcamentoOSUseCase(inputPort);
+	OrcamentoOSUseCase orcamentoOSUseCase(OrcamentoInputPort inputPort, OrcamentoOutputPort outputPort) {
+		return new OrcamentoOSUseCase(inputPort, outputPort);
+	}
+	
+	@Bean
+	PagamentoUseCase pagamentoOSUseCase(PagamentoInputPort inputPort, 
+			PagamentoOutputPort outputPort, PagamentoProcessamentoInputPort processamentoInputPort) {
+		return new PagamentoUseCase(inputPort, outputPort, processamentoInputPort);
 	}
 	
 	@Bean

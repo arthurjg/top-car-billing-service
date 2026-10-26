@@ -1,6 +1,5 @@
 package com.topcarservice.coreapi.domain.usecases.ports;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.topcarservice.coreapi.domain.entities.Pagamento;
@@ -8,7 +7,5 @@ import com.topcarservice.coreapi.domain.entities.Pagamento;
 public interface PagamentoOutputPort {
 
 	Optional<Pagamento> findById(Long codigo);
-
-	List<Pagamento> findAll();
 
 }

@@ -21,10 +21,9 @@ public class OrcamentoInputDB implements OrcamentoInputPort {
 	public OrdemServicoOrcamento save(OrdemServicoOrcamento ordemServicoOrcamento) {
 		
 		var ordemServicoDB = ordemServicoDBMapper.map(ordemServicoOrcamento);		
-		var ordemServicoDBSaved = orcamentoRepository.save(ordemServicoDB);
+		orcamentoRepository.save(ordemServicoDB);
 		
-		return ordemServicoOrcamento;
-		
+		return ordemServicoOrcamento;		
 	}	
 
 }

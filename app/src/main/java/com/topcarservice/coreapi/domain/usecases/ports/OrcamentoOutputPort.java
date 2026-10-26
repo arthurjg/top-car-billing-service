@@ -1,14 +1,11 @@
 package com.topcarservice.coreapi.domain.usecases.ports;
 
-import java.util.List;
 import java.util.Optional;
 
-import com.topcarservice.coreapi.domain.entities.OrdemServico;
+import com.topcarservice.coreapi.domain.entities.OrdemServicoOrcamento;
 
 public interface OrcamentoOutputPort {
 
-	Optional<OrdemServico> findById(Long codigo);
-
-	List<OrdemServico> findAll();
+	Optional<OrdemServicoOrcamento> findByCodigoOrdemServico(Long codigo);
 
 }

@@ -20,5 +20,9 @@ public class OrcamentoDBMapper {
 				.valorTotal(ordemServicoOrcamento.getValorTotal())				
 				.build();				
 	}	
+	
+	public OrdemServicoOrcamento mapTo(OrcamentoDBEntity orcamentoDBEntity) {		
+		return objectMapper.map(orcamentoDBEntity, OrdemServicoOrcamento.class);			
+	}	
 
 }

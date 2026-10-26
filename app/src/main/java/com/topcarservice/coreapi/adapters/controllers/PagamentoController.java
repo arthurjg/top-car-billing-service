@@ -7,70 +7,72 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.topcarservice.coreapi.adapters.controllers.dto.OrdemServicoRetornoDTO;
-import com.topcarservice.coreapi.adapters.controllers.mappers.OrdemServicoMapper;
-import com.topcarservice.coreapi.domain.entities.OrdemServico;
+import com.topcarservice.coreapi.adapters.controllers.dto.PagamentoDTO;
+import com.topcarservice.coreapi.adapters.controllers.mappers.PagamentoMapper;
 import com.topcarservice.coreapi.domain.entities.OrdemServicoOrcamento;
-import com.topcarservice.coreapi.domain.usecases.AprovacaoOSUseCase;
+import com.topcarservice.coreapi.domain.entities.Pagamento;
 import com.topcarservice.coreapi.domain.usecases.OrcamentoOSUseCase;
-//import com.topcarservice.coreapi.domain.usecases.OrdemServicoUseCase;
 import com.topcarservice.coreapi.domain.usecases.PagamentoUseCase;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-@Tag(name = "Ordem de Serviço", description = "Gerenciamento de ordens de serviço")
+@Tag(name = "Pagamentos", description = "Gerenciamento de pagamentos de ordens de serviço")
+@Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping("/admin/ordem-servicos")
+@RequestMapping("/admin/ordens-servico/orcamento")
 public class PagamentoController {
 	
-	/*PagamentoUseCase pagamentoUseCase;	
+	PagamentoUseCase pagamentoUseCase;				
 	
-	OrdemServicoUseCase ordemServicoUseCase;		
+	OrcamentoOSUseCase orcamentoOSUseCase;	
 	
-	OrcamentoOSUseCase orcamentoOSUseCase;
-	
-	AprovacaoOSUseCase aprovacaoOSUseCase;
-	
-	OrdemServicoMapper ordemServicoMapper;		
+	PagamentoMapper pagamentoMapper;		
 	
 	@PostMapping("/{id}/pagamento")
-	public ResponseEntity<OrdemServicoRetornoDTO> gerarPagamento(@PathVariable("id") Long codigo) {			
+	public ResponseEntity<PagamentoDTO> gerarPagamento(@PathVariable("id") Long codigo) {			
 		
 		try {
-			OrdemServico ordemServico = ordemServicoUseCase.carregar(codigo);	
+			OrdemServicoOrcamento orcamento = orcamentoOSUseCase.buscarPeloCodigoOrdemServico(codigo);	
 			
-			pagamentoUseCase.gerarPagamento(ordemServico);
+			var pagamento = pagamentoUseCase.gerarPagamento(orcamento);
 			
-			OrdemServicoRetornoDTO ordemservicoResponse = ordemServicoMapper.map(ordemServico);
+			PagamentoDTO pagamentoResponse = pagamentoMapper.map(pagamento);
 			
-			return ResponseEntity.ok().body(ordemservicoResponse);
-		} catch (IllegalArgumentException e) {			
+			log.info("Pagamento gerado com sucesso: {}", pagamentoResponse.getCodigo());
+			
+			return ResponseEntity.ok().body(pagamentoResponse);
+		} catch (IllegalArgumentException e) {		
+			log.error("Erro ao gerar pagamento: {}", e.getMessage());
 			return ResponseEntity.notFound().build();
 		} catch (IllegalStateException e) {			
+			log.error("Erro ao gerar pagamento: {}", e.getMessage());
 			return ResponseEntity.badRequest().build();
 		}	
-	}	
+	}		
 	
 	@PutMapping("/{id}/pagamento")
-	public ResponseEntity<OrdemServicoRetornoDTO> efetuarPagamento(@PathVariable("id") Long codigo) {			
+	public ResponseEntity<PagamentoDTO> efetuarPagamento(@PathVariable("id") Long codigo) {			
 		
 		try {
-			OrdemServico ordemServico = ordemServicoUseCase.carregar(codigo);	
+			Pagamento pagamento = pagamentoUseCase.carregar(codigo);
 			
-			OrdemServicoOrcamento ordemServicoOrcamento = orcamentoOSUseCase.gerarOrcamento(ordemServico);
-		
-			aprovacaoOSUseCase.enviarAprovacaoOrdemServico(ordemServico, ordemServicoOrcamento);
+			pagamento = pagamentoUseCase.efetuarPagamento(pagamento);			
 			
-			OrdemServicoRetornoDTO ordemservicoResponse = ordemServicoMapper.map(ordemServico);
+			PagamentoDTO pagamentoResponse = pagamentoMapper.map(pagamento);
 			
-			return ResponseEntity.ok().body(ordemservicoResponse);
+			log.info("Pagamento gerado com sucesso: {}", pagamentoResponse.getCodigo());
+			
+			return ResponseEntity.ok().body(pagamentoResponse);
 		} catch (IllegalArgumentException e) {			
+			log.error("Erro ao gerar pagamento: {}", e.getMessage());
 			return ResponseEntity.notFound().build();
 		} catch (IllegalStateException e) {			
+			log.error("Erro ao gerar pagamento: {}", e.getMessage());
 			return ResponseEntity.badRequest().build();
 		}	
-	}	*/
+	}
 
 }
