@@ -27,6 +27,7 @@ public class PagamentoDBEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
+	private Long codigoOrdemServico;
 	private String formaPagamento;
 	private String statusPagamento;
 	private String identificadorPagador;

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 public class Pagamento {
 	
 	private Long codigo;
+	private Long codigoOrdemServico;
 	private String formaPagamento;
 	private String statusPagamento;
 	private String identificadorPagador;
@@ -23,6 +24,7 @@ public class Pagamento {
 	public Pagamento(OrdemServicoOrcamento orcamento, String formaPagamento) {
 		this();
 	
+		this.setCodigoOrdemServico(orcamento.getCodigoOrdemServico());
 		this.formaPagamento = formaPagamento;
 		identificadorPagador = orcamento.getCliente();		
 		identificadorRecebedor = "TOPCARSERVICE LTDA";		
@@ -76,6 +78,14 @@ public class Pagamento {
 	}
 	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public Long getCodigoOrdemServico() {
+		return codigoOrdemServico;
+	}
+
+	public void setCodigoOrdemServico(Long codigoOrdemServico) {
+		this.codigoOrdemServico = codigoOrdemServico;
 	}	
 
 }

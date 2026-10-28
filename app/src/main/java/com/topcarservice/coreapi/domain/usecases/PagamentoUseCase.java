@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.topcarservice.coreapi.domain.entities.OrdemServicoOrcamento;
 import com.topcarservice.coreapi.domain.entities.Pagamento;
+import com.topcarservice.coreapi.domain.usecases.ports.PagamentoEventoOutputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PagamentoInputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PagamentoOutputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PagamentoProcessamentoInputPort;
@@ -13,14 +14,17 @@ public class PagamentoUseCase {
 	
 	private final PagamentoInputPort inputPort;
 	private final PagamentoOutputPort outputPort;
-	private final PagamentoProcessamentoInputPort pagamentoProcessamentoInputPort;		
-	
+	private final PagamentoProcessamentoInputPort pagamentoProcessamentoInputPort;	
+	private final PagamentoEventoOutputPort pagamentoEventoOutputPort;	
+
 	public PagamentoUseCase(PagamentoInputPort inputPort, PagamentoOutputPort outputPort,
-			PagamentoProcessamentoInputPort pagamentoProcessamentoInputPort) {
+			PagamentoProcessamentoInputPort pagamentoProcessamentoInputPort,
+			PagamentoEventoOutputPort pagamentoEventoOutputPort) {
 		super();
 		this.inputPort = inputPort;
 		this.outputPort = outputPort;
 		this.pagamentoProcessamentoInputPort = pagamentoProcessamentoInputPort;
+		this.pagamentoEventoOutputPort = pagamentoEventoOutputPort;
 	}
 
 	public Pagamento gerarPagamento(OrdemServicoOrcamento orcamento) {		
@@ -38,11 +42,14 @@ public class PagamentoUseCase {
 		pagamento = pagamentoProcessamentoInputPort.processar(pagamento);
 		pagamento.setDataPagamento(LocalDateTime.now());
 		pagamento.setStatusPagamento("CONCLUIDO");
-		return salvar(pagamento);		
+		
+		pagamento = salvar(pagamento);
+		
+		pagamentoEventoOutputPort.enviaEventoPagamentoEfetuado(pagamento);
+		return pagamento;		
 	}
 	
-	private Pagamento salvar(Pagamento pagamento) {
-		
+	private Pagamento salvar(Pagamento pagamento) {		
 		return inputPort.save(pagamento);	
 	}
 

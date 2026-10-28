@@ -8,6 +8,7 @@ import com.topcarservice.coreapi.domain.usecases.OrcamentoOSUseCase;
 import com.topcarservice.coreapi.domain.usecases.PagamentoUseCase;
 import com.topcarservice.coreapi.domain.usecases.ports.OrcamentoInputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.OrcamentoOutputPort;
+import com.topcarservice.coreapi.domain.usecases.ports.PagamentoEventoOutputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PagamentoInputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PagamentoOutputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PagamentoProcessamentoInputPort;
@@ -22,8 +23,11 @@ public class UseCasesConfig {
 	
 	@Bean
 	PagamentoUseCase pagamentoOSUseCase(PagamentoInputPort inputPort, 
-			PagamentoOutputPort outputPort, PagamentoProcessamentoInputPort processamentoInputPort) {
-		return new PagamentoUseCase(inputPort, outputPort, processamentoInputPort);
+			PagamentoOutputPort outputPort, PagamentoProcessamentoInputPort processamentoInputPort, 
+			PagamentoEventoOutputPort eventoOutputPort) {
+		
+		return new PagamentoUseCase(
+				inputPort, outputPort, processamentoInputPort, eventoOutputPort);
 	}
 	
 	@Bean

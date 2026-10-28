@@ -14,9 +14,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class PagamentoDTO{
+public class PagamentoDTO {
 	
 	private Long codigo;
+	private Long codigoOrdemServico;
 	private String formaPagamento;
 	private String statusPagamento;
 	private String identificadorPagador;
