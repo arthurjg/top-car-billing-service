@@ -17,7 +17,11 @@ public class OrcamentoOSUseCase {
 		this.outputPort = outputPort;
 	}
 
-	public OrdemServicoOrcamento gerarOrcamento(OrdemServico ordemServico) {			
+	public OrdemServicoOrcamento gerarOrcamento(OrdemServico ordemServico) throws Exception {		
+		
+		if(ordemServico.getCodigo() % 2 != 0) {
+			throw new IllegalArgumentException("Ordem de Serviço invalida para geração de orçamento [apenas pares] "); 
+		}
 		
 		var orcamento = new OrdemServicoOrcamento(ordemServico);
 		

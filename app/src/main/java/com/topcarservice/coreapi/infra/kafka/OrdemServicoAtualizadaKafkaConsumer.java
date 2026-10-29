@@ -40,17 +40,27 @@ public class OrdemServicoAtualizadaKafkaConsumer {
 		if(!ordemServico.getStatus().equals(StatusOrdemServico.EM_DIAGNOSTICO)) {
 			log.info("Ordem de serviço {} não está em diagnóstico. Nenhuma ação será tomada.", ordemServico.getCodigo());
 			return;
-		}
+		}			
+		
+		try {
 			
-		OrdemServicoOrcamento orcamento = orcamentoOSUseCase.gerarOrcamento(ordemServico);	
+			log.info("Iniciando geração do Orçamento para a OS: {}.", ordemServico.getCodigo());
+			
+			OrdemServicoOrcamento orcamento = orcamentoOSUseCase.gerarOrcamento(ordemServico);
+			
+			OrdemServicoOrcamentoDTO ordemServicoOrcamentoDTO = orcamentoMapper.map(orcamento);
+			
+			orcamentoGeradoKafkaProducer.sendOrcamentoGeradoEvent(ordemServicoOrcamentoDTO);
+			
+			log.info("Orçamento gerado para a OS: {}. Orçamento gerado Evento enviado", ordemServico.getCodigo());
+			
+			aprovacaoOSUseCase.enviarAprovacaoOrdemServico(ordemServico, orcamento);
+		} catch (Exception e) {
+			
+			log.error("Erro ao gerar orçamento, revertendo status da OS para em_diagnóstico");
+		}	
 		
-		OrdemServicoOrcamentoDTO ordemServicoOrcamentoDTO = orcamentoMapper.map(orcamento);
 		
-		orcamentoGeradoKafkaProducer.sendOrcamentoGeradoEvent(ordemServicoOrcamentoDTO);
-		
-		log.info("Orçamento gerado para a OS: {}. Orçamento gerado Evento enviado", ordemServico.getCodigo());
-		
-		aprovacaoOSUseCase.enviarAprovacaoOrdemServico(ordemServico, orcamento);
 	}
 
 }
