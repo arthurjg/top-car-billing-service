@@ -19,10 +19,6 @@ public class OrcamentoOSUseCase {
 
 	public OrdemServicoOrcamento gerarOrcamento(OrdemServico ordemServico) throws Exception {		
 		
-		if(ordemServico.getCodigo() % 2 != 0) {
-			throw new IllegalArgumentException("Ordem de Serviço invalida para geração de orçamento [apenas pares] "); 
-		}
-		
 		var orcamento = new OrdemServicoOrcamento(ordemServico);
 		
 		inputPort.save(orcamento);
@@ -36,6 +32,10 @@ public class OrcamentoOSUseCase {
 		return outputPort.findByCodigoOrdemServico(codigoOrdemServico)
 				.orElseThrow(() -> new IllegalArgumentException("Orçamento não encontrado para a Ordem de Serviço: " + codigoOrdemServico));
 		
+	}
+
+	public void remover(OrdemServicoOrcamento orcamento) {
+		inputPort.delete(orcamento);		
 	}	
 	
 	

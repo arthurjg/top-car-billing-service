@@ -6,4 +6,6 @@ public interface OrcamentoInputPort {
 
 	OrdemServicoOrcamento save(OrdemServicoOrcamento ordemServicoOrcamento);
 
+	void delete(OrdemServicoOrcamento orcamento);
+
 }

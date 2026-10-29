@@ -19,7 +19,7 @@ public class OrdemServicoOrcamento {
 		this.dataOrcamento = LocalDateTime.now();		
 	}
 	
-	public OrdemServicoOrcamento(OrdemServico ordemServico) {
+	public OrdemServicoOrcamento(OrdemServico ordemServico) throws Exception {
 		this();
 		this.codigoOrdemServico = ordemServico.getCodigo();
 		this.cliente = ordemServico.getCliente();
@@ -32,6 +32,14 @@ public class OrdemServicoOrcamento {
 					servicoSolicitado.getValorMaoDeObra());
 			this.itens.add(item);
 		});
+		
+		boolean itensInconsistente = ordemServico.getPecasInsumos().stream()
+			.anyMatch((pecasInsumo) -> pecasInsumo.getQuantidade() == 0);
+		
+		if(itensInconsistente) {
+			throw new Exception("Ordem de Serviço invalida para geração de orçamento - valores de itens invalidos. "); 
+		}
+			
 		
 		ordemServico.getPecasInsumos().forEach(pecaInsumoSolicitado -> {
 			OrcamentoItem item = new OrcamentoItem(

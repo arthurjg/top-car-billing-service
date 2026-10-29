@@ -24,6 +24,15 @@ public class OrcamentoInputDB implements OrcamentoInputPort {
 		orcamentoRepository.save(ordemServicoDB);
 		
 		return ordemServicoOrcamento;		
+	}
+
+	@Override
+	public void delete(OrdemServicoOrcamento orcamento) {
+		
+		var ordemServicoDB = ordemServicoDBMapper.map(orcamento);
+		
+		orcamentoRepository.delete(ordemServicoDB);
+		
 	}	
 
 }

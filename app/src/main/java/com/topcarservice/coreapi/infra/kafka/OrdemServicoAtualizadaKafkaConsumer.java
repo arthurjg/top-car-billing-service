@@ -57,7 +57,7 @@ public class OrdemServicoAtualizadaKafkaConsumer {
 			aprovacaoOSUseCase.enviarAprovacaoOrdemServico(ordemServico, orcamento);
 		} catch (Exception e) {
 			
-			log.error("Erro ao gerar orçamento, revertendo status da OS para em_diagnóstico");
+			log.error("Erro ao gerar orçamento {}, revertendo status da OS para em_diagnóstico", e.getMessage());
 		}	
 		
 		

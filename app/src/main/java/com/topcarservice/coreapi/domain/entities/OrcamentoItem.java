@@ -19,7 +19,7 @@ public class OrcamentoItem {
 		this.descricao = descricao;
 		this.quantidade = quantidade;
 		this.valorUnitario = valorUnitario;
-		this.valorTotal = valorTotal;
+		this.valorTotal = valorTotal != null ? valorTotal : BigDecimal.ZERO;
 	}	
 
 	public BigDecimal getValorTotal() {
