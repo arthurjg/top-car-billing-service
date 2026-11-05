@@ -51,14 +51,6 @@ public class PagamentoUseCase {
 	
 	private Pagamento salvar(Pagamento pagamento) {		
 		return inputPort.save(pagamento);	
-	}
-
-	/*
-	 * public void excluir(Pagamento Pagamento) { inputPort.delete(Pagamento); }
-	 * 
-	 * public List<Pagamento> listar() { return outputPort.findAll(); }
-	 */
-
-	
+	}	
 
 }

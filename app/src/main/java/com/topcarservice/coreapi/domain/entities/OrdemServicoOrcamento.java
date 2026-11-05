@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OrdemServicoOrcamento {
 	
@@ -76,6 +77,23 @@ public class OrdemServicoOrcamento {
 				"+-----valorTotal=" + valorTotal + "--------+\n" +
 				"+---------------------------------------------+\n";
 						
+	}	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cliente, codigoOrdemServico);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrdemServicoOrcamento other = (OrdemServicoOrcamento) obj;
+		return Objects.equals(cliente, other.cliente) && Objects.equals(codigoOrdemServico, other.codigoOrdemServico);
 	}
 
 	public Long getCodigoOrdemServico() {

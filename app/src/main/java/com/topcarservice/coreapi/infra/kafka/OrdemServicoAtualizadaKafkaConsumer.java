@@ -58,9 +58,7 @@ public class OrdemServicoAtualizadaKafkaConsumer {
 		} catch (Exception e) {
 			
 			log.error("Erro ao gerar orçamento {}, revertendo status da OS para em_diagnóstico", e.getMessage());
-		}	
-		
-		
+		}		
 	}
 
 }

@@ -47,10 +47,7 @@ public class PagamentoController {
 		} catch (IllegalArgumentException e) {		
 			log.error("Erro ao gerar pagamento: {}", e.getMessage());
 			return ResponseEntity.notFound().build();
-		} catch (IllegalStateException e) {			
-			log.error("Erro ao gerar pagamento: {}", e.getMessage());
-			return ResponseEntity.badRequest().build();
-		}	
+		}
 	}		
 	
 	@PutMapping("/{id}/pagamento")
@@ -69,10 +66,7 @@ public class PagamentoController {
 		} catch (IllegalArgumentException e) {			
 			log.error("Erro ao gerar pagamento: {}", e.getMessage());
 			return ResponseEntity.notFound().build();
-		} catch (IllegalStateException e) {			
-			log.error("Erro ao gerar pagamento: {}", e.getMessage());
-			return ResponseEntity.badRequest().build();
-		}	
+		}
 	}
 
 }

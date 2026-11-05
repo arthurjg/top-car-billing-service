@@ -2,6 +2,7 @@ package com.topcarservice.coreapi.domain.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Pagamento {
 	
@@ -29,8 +30,26 @@ public class Pagamento {
 		identificadorPagador = orcamento.getCliente();		
 		identificadorRecebedor = "TOPCARSERVICE LTDA";		
 		valorTotal = orcamento.getValorTotal();		
-	}
+	}	
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigo, codigoOrdemServico, formaPagamento);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pagamento other = (Pagamento) obj;
+		return Objects.equals(codigo, other.codigo) && Objects.equals(codigoOrdemServico, other.codigoOrdemServico)
+				&& Objects.equals(formaPagamento, other.formaPagamento);
+	}
+
 	public Long getCodigo() {
 		return codigo;
 	}
