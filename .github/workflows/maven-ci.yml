@@ -16,8 +16,9 @@ permissions:
   contents: read
 
 env:
+  APP_NAME: top-car-billing-service
   AWS_REGION: us-east-1                   
-  ECR_REPOSITORY: top-car-service-app
+  ECR_REPOSITORY: top-car-service/top-car-billing-service
   EKS_CLUSTER_NAME: top-car-eks
 
 jobs:
@@ -58,12 +59,12 @@ jobs:
       - name: Build and Analyze with SonarQube
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify --file app/pom.xml org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=arthurjg_top-car-billing-service
+        run: mvn -B verify --file app/pom.xml org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=arthurjg_${{ env.APP_NAME }}
     
       - name: Build the Docker image
         run: |
           mvn -B package --file app/pom.xml
-          docker build . --file Dockerfile --tag top-car-os-service:$(date +%s)
+          docker build . --file Dockerfile --env=ENV=prod --tag ${{ env.APP_NAME }}:$(date +%s)
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
