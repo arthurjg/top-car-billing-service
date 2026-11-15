@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven - Feature
+name: Java CI with Maven - Feature Dev
 
 on:  
   push:
@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 env:
-  APP_NAME: top-car-billing-service
+  APP_NAME: top-car-exec-service
   AWS_REGION: us-east-1                   
   ECR_REPOSITORY: top-car-service/top-car-billing-service
   EKS_CLUSTER_NAME: top-car-eks
